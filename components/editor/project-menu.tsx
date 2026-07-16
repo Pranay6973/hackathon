@@ -14,8 +14,8 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 export interface ProjectMenuProps {
   projectName: string;
   projectId: string;
-  creditsRemaining: number;
-  creditsTotal: number;
+  creditsRemaining?: number;
+  creditsTotal?: number;
   userPlan: "free" | "pro";
   onRename: (newName: string) => void;
   onDelete: () => void;
@@ -87,13 +87,16 @@ function handleRenameKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
   }
 }
 
+const safeCreditsTotal = creditsTotal ?? 50;
 const isUnlimited = creditsRemaining === -1;
-const isPro = userPlan === "pro";
-const displayRemaining = isUnlimited ? creditsTotal : (creditsRemaining ?? 0);
+const displayRemaining = isUnlimited
+  ? safeCreditsTotal
+  : (creditsRemaining ?? 0);
+
 const progressPercent = isUnlimited
   ? 100
-  : creditsTotal > 0
-    ? (displayRemaining / creditsTotal) * 100
+  : safeCreditsTotal > 0
+    ? (displayRemaining / safeCreditsTotal) * 100
     : 0;
 
 
@@ -146,12 +149,12 @@ return (
 
 {/* Credits progress - live data */}
 <div className="px-2 pb-2">
-  <div className="flex items-center justify-between text-xs text-muted-foreground mb-1">
+  <div className="mb-1 flex items-center justify-between text-xs text-muted-foreground">
     <span>Credits</span>
     <span>
       {isUnlimited
         ? "Unlimited"
-        : `${creditsRemaining ?? 0} / ${creditsTotal}`}
+        : `${creditsRemaining ?? 0} / ${safeCreditsTotal}`}
     </span>
   </div>
 
