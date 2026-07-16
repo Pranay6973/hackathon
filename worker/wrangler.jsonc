@@ -1,0 +1,21 @@
+{
+    "$schema": "node_modules/wrangler/config-schema.json",
+    "name": "nextjs-primes-agent",
+    "main": "src/index.ts",
+    "compatibility_date": "2025-01-01",
+    "compatibility_flags": ["nodejs_compat"],
+     "kv_namespaces": [
+    {
+      "binding": "METADATA",
+      "id": "b71224e72d8f47d292437fec634654b8",
+      "remote": true,
+    },
+  ],
+  "r2_buckets": [
+    {
+        "binding": "FILES",
+        "bucket_name": "nextjs-primes-agent",
+    },
+  ],
+}
+
