@@ -1,7 +1,7 @@
 "use client";
 
 import { ClerkProvider } from "@clerk/nextjs";
-import { useTheme } from "next-themes";
+import { useTheme } from "./theme-provider";
 import { dark } from "@clerk/themes";
 import { ThemeProvider } from "./theme-provider";
 
@@ -35,7 +35,7 @@ export function Providers({
   children: React.ReactNode;
 }) {
   return (
-    <ThemeProvider defaultTheme="dark" attribute="class">
+    <ThemeProvider defaultTheme="dark">
       <ClerkWithTheme>{children}</ClerkWithTheme>
     </ThemeProvider>
   );
