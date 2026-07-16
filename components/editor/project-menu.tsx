@@ -136,7 +136,7 @@ return (
 
   <div className="flex flex-col">
     <span className="text-sm font-medium">
-      {user.fullName ?? "User"}
+      {user?.fullName || "User"}
     </span>
     <Badge
       variant="secondary"
