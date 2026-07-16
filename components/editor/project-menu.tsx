@@ -88,7 +88,10 @@ function handleRenameKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
 }
 
 const safeCreditsTotal = creditsTotal ?? 50;
+
 const isUnlimited = creditsRemaining === -1;
+const isPro = userPlan === "pro";
+
 const displayRemaining = isUnlimited
   ? safeCreditsTotal
   : (creditsRemaining ?? 0);
